@@ -1,24 +1,26 @@
-# 파이썬
-import sys
+n = int(input().rstrip())
+m = int(input().rstrip())
 
-def solution(n, lost, reserve):
-    t = n - len(lost)
-    for i in reserve:
-        for j in lost:
-            if i-1 == j:
-                reserve.remove(i)
-                lost.remove(j)
-                t += 1
-                break
-            elif i+1 == j:
-                reserve.remove(i)
-                lost.remove(j)
-                t += 1
-                break
-    answer = t
-    return answer
+l = [[] for _ in range(n+1)]
+r = 0
+visit = [False] * (n+1)
 
-n = int(sys.stdin.readline())
-lost = list(map(int, sys.stdin.readline().split()))
-reserve = list(map(int, sys.stdin.readline().split()))
-print(solution(n, lost, reserve))
+for _ in range(m):
+    x, y = map(int, input().split())
+    l[x].append(y)
+    l[y].append(x)
+    
+for i in range(1, n):
+    l[i].sort()
+
+def dfs(g, v, visit):
+    global r
+    visit[v] = True
+    r+=1
+    
+    for i in g[v]:
+        if not visit[i]:
+            dfs(g, i, visit)
+
+dfs(l, 1, visit)
+print(r-1)

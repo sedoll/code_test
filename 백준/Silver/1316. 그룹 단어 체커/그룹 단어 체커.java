@@ -24,8 +24,6 @@ public class Main {
                             continue;
                         } else if (chars[j] != chars[j+1] && !ckList.contains(chars[j])) {
                             ckList.add(chars[j]);
-                        } else if (j == chars.length-1 && !ckList.contains(chars[j])) {
-                            ckList.add(chars[j]);
                         } else {
                             ck = false;
                             break;

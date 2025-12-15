@@ -15,7 +15,7 @@ public class Main {
             if (deque.size() == 1) break;
             deque.removeFirst(); // 없앤다.
             if (deque.size() == 1) break;
-            deque.addLast(deque.removeFirst()); // 맨 첫번째 값을 맨 뒤에 넣는다.
+            deque.add(deque.removeFirst()); // 맨 첫번째 값을 맨 뒤에 넣는다.
         }
         System.out.println(deque.pop());
     }

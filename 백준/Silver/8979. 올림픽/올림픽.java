@@ -80,31 +80,22 @@ public class Main {
                 .thenComparing(Comparator.comparingInt(Medal::getSiv).reversed())
                 .thenComparing(Comparator.comparingInt(Medal::getBrz).reversed()));
 
-        if (list.size() == 1) {
+        list.get(0).setRank(1);
+        if (list.get(0).getCty() == K) {
             System.out.println(1);
             return;
         }
-        list.get(0).setRank(1);
         int sum = 1;
         for (int i=1; i<list.size(); i++) {
             Medal m1 = list.get(i-1);
             Medal m2 = list.get(i);
-            if (m1.getGold() == m2.getGold()) { // 금메달 수 동일
-                if (m1.getSiv() == m2.getSiv()) { // 은메달 수 동일
-                    if (m1.getBrz() == m2.getBrz()) { // 동메달 수 동일
-                        m2.setRank(m1.getRank());
-                        sum++;
-                    } else if (m1.getBrz() > m2.getBrz()) {// 동메달 수가 더 낮음
-                        m2.setRank(m1.getRank()+sum);
-                        sum = 1;
-                    }
-                } else if (m1.getSiv() > m2.getSiv()) { // 은메달 수가 더 낮음
-                    m2.setRank(m1.getRank()+sum);
-                    sum = 1;
-                }
-            } else if (m1.getGold() > m2.getGold()) { // 금메달 수가 더 낮음
+            if (m1.getGold() == m2.getGold() &&
+                    m1.getSiv() == m2.getSiv() &&
+                    m1.getBrz() == m2.getBrz()) {
+                m2.setRank(m1.getRank());
+                sum++;
+            } else {
                 m2.setRank(m1.getRank()+sum);
-                sum = 1;
             }
             if (m2.getCty() == K) {
                 result = m2.getRank();

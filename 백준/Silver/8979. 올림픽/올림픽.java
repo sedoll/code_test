@@ -96,6 +96,7 @@ public class Main {
                 sum++;
             } else {
                 m2.setRank(m1.getRank()+sum);
+                sum = 1;
             }
             if (m2.getCty() == K) {
                 result = m2.getRank();
